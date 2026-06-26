@@ -42,7 +42,8 @@ Asegúrate de tener instalado [Node.js](https://nodejs.org/).
    ```bash
    npm run dev
    ```
-
+4. ** Para acceder al panel administrativo y visualizar las solicitudes:**
+http://localhost:5173/dashboard
 ## Scripts Disponibles
 
 *   `npm run dev`: Inicia el servidor de desarrollo local.
