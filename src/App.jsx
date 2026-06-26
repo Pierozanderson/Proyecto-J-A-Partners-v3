@@ -1,43 +1,36 @@
+import "./App.css";
+import { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./hooks/LanguageContext";
+import { SkipLink } from "./components/responsives/SkipLink";
+import { CRMProvider } from "./hooks/CRMContext";
 
-import './App.css'
-import {lazy} from 'react'
-const  Navbar = lazy(() => import('./layouts/navbar/Navbar.jsx'))
-const  Hero = lazy(() => import('./layouts/hero/Hero.jsx'))
-const  AboutSection = lazy(() => import('./layouts/about/AboutSection.jsx'))
-const  HistorySection = lazy(() => import('./layouts/about/HistorySection.jsx'))
-//const  PropositeSection = lazy(() => import('./layouts/about/PropositeSection.jsx'))
-const  Services = lazy(() => import('./layouts/sections/Services.jsx'))
-const  WhySection = lazy(() => import('./layouts/about/WhySection.jsx'))
-const  WhoSection = lazy(() => import('./layouts/about/WhoSection.jsx'))
-const  Stats = lazy(() => import('./layouts/stats/Stats.jsx'))
-const  TestimonialsSection = lazy(() => import('./layouts/testimonials/TestimonialsSection.jsx'))
-const  Cta = lazy(() => import('./layouts/form/Cta.jsx'))
-const  Form = lazy(() => import('./layouts/form/Form.jsx'))
-const  Schedule = lazy(() => import('./layouts/schedule/Schedule.jsx')) 
-const  Footer = lazy(() => import('./layouts/footer/Footer.jsx'))
-import { LanguageProvider } from './hooks/LanguageContext.jsx'
-import { SkipLink } from './components/responsives/SkipLink.jsx'
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  return (
-    <LanguageProvider>
-      <SkipLink />
-      <Navbar/>
-      <Hero/>
-      <AboutSection />
-      <HistorySection />
-      {/* <PropositeSection /> */}
-      <WhySection />
-      <WhoSection />
-      <Stats />
-      <Services />
-      <TestimonialsSection />
-      <Cta/>
-      <Form />
-      <Schedule />
-      <Footer />
-    </LanguageProvider>
-  )
+    return (
+        <LanguageProvider>
+          <CRMProvider>
+            <SkipLink />
+
+            <Suspense fallback={<div>Cargando...</div>}>
+
+                <Routes>
+
+                    <Route path="/" element={<Home />} />
+
+                    <Route
+                        path="/dashboard"
+                        element={<Dashboard />}
+                    />
+
+                </Routes>
+
+            </Suspense>
+</CRMProvider>
+        </LanguageProvider>
+    );
 }
 
-export default App
+export default App;

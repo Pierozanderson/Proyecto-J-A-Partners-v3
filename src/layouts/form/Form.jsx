@@ -1,4 +1,6 @@
 import { useActionState, useState } from "react"
+import { saveLead } from "@/crm/crmStorage";
+import { generateLeadCode } from "@/crm/crmUtils";
 import { useLanguage } from "@/hooks/LanguageContext.jsx"
 import FormContact from "@/layouts/form/FormContact"
 import FormFields from "@/layouts/form/FormFields"
@@ -43,6 +45,12 @@ setProspectData({
     opportunity,
     recommendation,
 })
+saveLead({
+    codigo: generateLeadCode(),
+    ...payload,
+    opportunity,
+    recommendation,
+});
 setStep("summary")
 
         const endpoint = import.meta.env.VITE_FORM_ENDPOINT?.trim()
